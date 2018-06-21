@@ -183,6 +183,20 @@ const LineLayerExample = {
   }
 };
 
+const _data = [{START: [0, 0], END: [10, 10]}, {START: [50, 50], END: [100, 100]}];
+const ScreenLineLayerExample = {
+  layer: LineLayer,
+  getData: () => _data, // dataSamples.routes,
+  props: {
+    id: 'lineLayer',
+    getSourcePosition: d => d.START,
+    getTargetPosition: d => d.END,
+    getColor: d => (d.SERVICE === 'WEEKDAY' ? [255, 64, 0] : [255, 200, 0]),
+    pickable: true,
+    coordinateSystem: COORDINATE_SYSTEM.IDENTITY
+  }
+};
+
 const ScatterplotLayerExample = {
   layer: ScatterplotLayer,
   getData: () => dataSamples.points,
@@ -483,6 +497,7 @@ export default {
     ScatterplotLayer: ScatterplotLayerExample,
     ArcLayer: ArcLayerExample,
     LineLayer: LineLayerExample,
+    ScreenLineLayer: ScreenLineLayerExample,
     IconLayer: IconLayerExample,
     GridCellLayer: GridCellLayerExample,
     GridLayer: GridLayerExample,
