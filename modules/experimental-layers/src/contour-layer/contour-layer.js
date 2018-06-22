@@ -39,7 +39,7 @@ const defaultProps = {
   contours: [{threshold: DEFAULT_THRESHOLD, color: DEFAULT_COLOR}],
   getStrokeWidth: 1,
 
-  fp64: false,
+  fp64: false
 };
 
 export default class ContourLayer extends CompositeLayer {

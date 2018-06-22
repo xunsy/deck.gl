@@ -22,9 +22,15 @@ const GETCODE_TESTS = [
   // non zero cellIndex
   {
     cellWeights: [
-      5, 5, 5, // row-0
-      5, 5, 5, // row-1
-      5, 10, 10 // row-2
+      5,
+      5,
+      5, // row-0
+      5,
+      5,
+      5, // row-1
+      5,
+      10,
+      10 // row-2
     ],
     gridSize: [3, 3],
     cellIndex: 4,
@@ -32,15 +38,20 @@ const GETCODE_TESTS = [
   },
   {
     cellWeights: [
-      5, 5, 5, // row-0
-      10, 5, 5, // row-1
-      10, 5, 5 // row-2
+      5,
+      5,
+      5, // row-0
+      10,
+      5,
+      5, // row-1
+      10,
+      5,
+      5 // row-2
     ],
     gridSize: [3, 3],
     cellIndex: 3,
     code: 9
   }
-
 ];
 
 const GETVERTEX_TESTS = [
@@ -72,7 +83,6 @@ const GETVERTEX_TESTS = [
     cellIndex: 4,
     vertices: [[115, 240], [125, 240]],
     gridSize: [3, 3]
-
   },
   {
     gridOrigin: [100, 200],
@@ -87,7 +97,7 @@ test('MarchingSquares#getCode', t => {
   const thresholdValue = 6;
   const cellIndex = 0;
   const gridSize = [2, 2];
-  GETCODE_TESTS.forEach((testCase) => {
+  GETCODE_TESTS.forEach(testCase => {
     const code = MarchingSquares.getCode({
       cellWeights: testCase.cellWeights,
       thresholdValue,
@@ -103,7 +113,7 @@ test('MarchingSquares#getVertices', t => {
   const cellIndex = 0;
   const cellSize = [10, 20];
   const gridSize = [2, 2];
-  GETVERTEX_TESTS.forEach((testCase) => {
+  GETVERTEX_TESTS.forEach(testCase => {
     const vertices = MarchingSquares.getVertices({
       gridOrigin: testCase.gridOrigin,
       cellIndex: testCase.cellIndex || cellIndex,
@@ -111,7 +121,11 @@ test('MarchingSquares#getVertices', t => {
       gridSize: testCase.gridSize || gridSize,
       code: testCase.code
     });
-    t.deepEquals(vertices, testCase.vertices, `Vertices: expected: ${testCase.vertices}, actual: ${vertices}`);
+    t.deepEquals(
+      vertices,
+      testCase.vertices,
+      `Vertices: expected: ${testCase.vertices}, actual: ${vertices}`
+    );
   });
   t.end();
 });
