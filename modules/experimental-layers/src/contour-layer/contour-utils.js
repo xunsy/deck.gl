@@ -22,7 +22,7 @@ export function generateContours({
           gridSize
         });
         const vertices = MarchingSquares.getVertices({
-          gridOrigin: [gridOrigin[0] - 180, gridOrigin[1] - 90], // gridVertices,
+          gridOrigin,
           cellIndex,
           cellSize,
           gridSize,
