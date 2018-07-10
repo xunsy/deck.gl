@@ -95,7 +95,7 @@ export class App extends Component {
         layers={layers}
         width={width}
         height={height}
-        views={new OrbitView()}
+        views={[new OrbitView()]}
         viewState={viewState}
         controller={true}
         onViewStateChange={this._onViewStateChange}
