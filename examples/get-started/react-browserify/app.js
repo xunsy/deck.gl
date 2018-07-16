@@ -14,7 +14,43 @@ const INITIAL_VIEW_STATE = {
   pitch: 60
 };
 
+const COLORS = [[255, 0, 0], [0, 0, 255]];
+
 class Root extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      colorIndex: null,
+      scatterplotData: [{position: [-122.41669, 37.79]}]
+    };
+  }
+
+  componentDidMount() {
+    this.onTick();
+  }
+
+  onTick() {
+    let nextColorIndex = null;
+    let nextColorName = null;
+    switch (this.state.colorIndex) {
+      case null:
+        nextColorIndex = 0;
+        nextColorName = 'RED';
+        break;
+      case 0:
+        nextColorIndex = 1;
+        nextColorName = 'BLUE';
+        break;
+      default:
+        nextColorIndex = null;
+        nextColorName = 'WHITE';
+        break;
+    }
+    console.log(`setting color name=${nextColorName}, index=${nextColorIndex}`); // eslint-disable-line
+    this.setState({colorIndex: nextColorIndex});
+    setTimeout(() => this.onTick(), 2000); // eslint-disable-line no-undef
+  }
+
   render() {
     return (
       <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} width="100%" height="100%">
@@ -24,9 +60,14 @@ class Root extends Component {
           strokeWidth={5}
         />
         <ScatterplotLayer
-          data={[{position: [-122.41669, 37.79]}]}
+          data={this.state.scatterplotData}
           radiusScale={100}
-          getColor={x => [0, 0, 255]}
+          getColor={() =>
+            this.state.colorIndex === null ? [255, 255, 255] : COLORS[this.state.colorIndex]
+          }
+          updateTriggers={{
+            getColor: this.state.colorIndex
+          }}
         />
       </DeckGL>
     );
