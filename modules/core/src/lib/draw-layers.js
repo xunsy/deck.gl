@@ -76,7 +76,8 @@ export function drawLayers(
     pass = 'draw',
     redrawReason = '',
     stats,
-    customRender
+    customRender,
+    customMatrix
   }
 ) {
   if (!customRender) {
@@ -104,7 +105,8 @@ export function drawLayers(
       layerFilter,
       pass,
       redrawReason,
-      stats
+      stats,
+      customMatrix
     });
   });
 
@@ -176,7 +178,8 @@ function drawLayersInViewport(
     layerFilter,
     pass = 'draw',
     redrawReason = '',
-    stats
+    stats,
+    customMatrix
   }
 ) {
   const pixelRatio = getPixelRatio({useDevicePixels});
@@ -236,7 +239,8 @@ function drawLayersInViewport(
         drawPickingColors,
         pixelRatio,
         glViewport,
-        parameters
+        parameters,
+        customMatrix
       });
     }
   });
@@ -253,6 +257,7 @@ function drawLayerInViewport({
   drawPickingColors,
   pixelRatio,
   glViewport,
+  customMatrix,
   parameters
 }) {
   const moduleParameters = Object.assign(Object.create(layer.props), {
@@ -261,7 +266,7 @@ function drawLayerInViewport({
     devicePixelRatio: pixelRatio
   });
 
-  const uniforms = Object.assign({}, layer.context.uniforms, {layerIndex});
+  const uniforms = Object.assign({}, layer.context.uniforms, {layerIndex}, {customMatrix});
 
   // All parameter resolving is done here instead of the layer
   // Blend parameters must not be overriden

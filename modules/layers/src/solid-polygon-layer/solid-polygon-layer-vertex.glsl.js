@@ -37,6 +37,7 @@ uniform bool extruded;
 uniform bool isWireframe;
 uniform float elevationScale;
 uniform float opacity;
+uniform mat4 customMatrix;
 
 varying vec4 vColor;
 varying float isValid;
@@ -62,7 +63,9 @@ void main(void) {
   pos.z *= elevationScale;
 
   vec4 position_worldspace;
-  gl_Position = project_position_to_clipspace(pos, pos64xyLow, vec3(0.), position_worldspace);
+  vec2 world_pos = project_mercator_(pos.xy) / 2.0 / PI;
+  gl_Position = customMatrix * vec4(world_pos, 0, 1.0);
+  //gl_Position = project_position_to_clipspace2(pos, pos64xyLow, vec3(0.), position_worldspace);
 
   float lightWeight = 1.0;
   

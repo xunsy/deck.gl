@@ -35,6 +35,14 @@ vec4 project_position_to_clipspace(
   vec4 worldPosition;
   return project_position_to_clipspace(position, position64xyLow, offset, worldPosition);
 }
+
+vec4 project_position_to_clipspace2(
+  vec3 position, vec2 position64xyLow, vec3 offset, out vec4 worldPosition
+) {
+  vec3 projectedPosition = project_position(position, position64xyLow);
+  worldPosition = vec4(projectedPosition + offset, 1.0);
+  return project_to_clipspace(worldPosition);
+}
 `;
 
 export default {

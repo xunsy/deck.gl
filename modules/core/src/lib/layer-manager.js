@@ -241,6 +241,7 @@ export default class LayerManager {
     pass = 'render to screen',
     viewports,
     views,
+    customMatrix,
     redrawReason = 'unknown reason',
     customRender = false
   }) {
@@ -258,7 +259,8 @@ export default class LayerManager {
       pass,
       layerFilter: this.layerFilter,
       redrawReason,
-      customRender
+      customRender,
+      customMatrix
     });
   }
 
