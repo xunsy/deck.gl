@@ -43,7 +43,7 @@ export default class DeckLayer {
     // console.log('render3D', viewState, matrix);
     // gl.depthRange(0.9999, 1.0);
 
-    this.deck.setProps({viewState});
+    this.deck.setProps({viewState, customMatrix: matrix});
     this.deck._drawLayers();
     this.map.triggerRepaint();
   }
